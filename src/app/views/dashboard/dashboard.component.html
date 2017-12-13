@@ -1,0 +1,18 @@
+<div class="animated fadeIn">
+  <div *ngIf="clients$ | async as clients">
+    <div class="col-sm-6 col-md-2">
+      <div class="card text-white bg-info">
+        <div class="card-body">
+          <div class="h1 text-muted text-right mb-4">
+            <i class="icon-user-follow"></i>
+          </div>
+          <div class="h4 mb-0">{{clients.length}}</div>
+          <small class="text-muted text-uppercase font-weight-bold">Total Clients</small>
+        </div>
+      </div>
+    </div><!--/.col-->
+  </div>
+
+</div>
+
+

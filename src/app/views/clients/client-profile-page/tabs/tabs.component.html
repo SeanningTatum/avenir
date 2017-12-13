@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-12">
+    <nav class="nav nav-tabs nav-justified">
+      <a class="nav-item nav-link" [routerLink]="['tasks']" routerLinkActive="active">Create task</a>
+      <a class="nav-item nav-link" [routerLink]="['deals']" routerLinkActive="active">Deals</a>
+      <a class="nav-item nav-link" [routerLink]="['units-owned']" routerLinkActive="active">Units Owned</a>
+    </nav>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div style="background-color: white;">
+      <div class="container pt-4">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

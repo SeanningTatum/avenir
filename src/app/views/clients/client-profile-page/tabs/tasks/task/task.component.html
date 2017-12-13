@@ -1,0 +1,19 @@
+<div *ngFor="let task of tasks; let i = index">
+  <div
+    [class.callout-success]="task.finished"
+    [class.callout-warning]="!task.finished"
+    class="callout m-0 py-3" >
+    <button
+      (click)="finish(task)"
+      *ngIf="!task.finished"
+      class="btn btn-secondary float-right">Finish</button>
+    <h5>{{task.title}}</h5>
+    <p class="m-0 badge badge-success" *ngIf="task.finished">
+      <span>Finished on: {{task.finishDate | date}}</span>
+    </p>
+    <p class="m-0 badge badge-danger">
+      <span>Due date: {{task.dueDate}}</span>
+    </p>
+  </div>
+  <hr class="mx-3 my-0" *ngIf="i !== 0">
+</div>

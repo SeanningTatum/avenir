@@ -1,0 +1,80 @@
+<div class="animated fadeIn">
+  <h1 class="display4 mr-auto">Clients</h1>
+  <hr class="my-3">
+  <div class="card">
+    <!-- <div class="card-header">
+      <h4 class="align-middle d-inline-block mt-2">Clients</h4>
+    </div> -->
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-6 col-sm-6 col-12 mb-3">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Search by name"/>
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-6 col-12">
+          <button class="btn btn-primary btn-block" data-toggle="myModal" (click)="openModal(template)">Add Client</button>
+        </div>
+      </div>
+      <table class="table table-striped" [mfData]="data | async | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
+        <thead>
+          <tr>
+            <th style="width: 20%">
+              <mfDefaultSorter by="name">Name</mfDefaultSorter>
+            </th>
+            <th style="width: 50%" class="d-sm-down-none">
+              <mfDefaultSorter by="email">Email</mfDefaultSorter>
+            </th>
+            <th style="width: 10%" class="d-sm-down-none">
+              <mfDefaultSorter by="age">Phone Number</mfDefaultSorter>
+            </th>
+            <th style="width: 20%" class="text-center">
+              <mfDefaultSorter by="city">Profile</mfDefaultSorter>
+            </th>
+          </tr>
+        </thead>
+        <tbody *ngIf="!showSpinner; else loading">
+          <tr *ngFor="let client of mf.data; let x = index">
+            <td class="align-middle">{{client.name}}</td>
+            <td class="align-middle d-sm-down-none">{{client.email}}</td>
+            <td class="text-right align-middle d-sm-down-none">{{client.phone}}</td>
+            <td class="text-right">
+              <button class="btn btn-warning" routerLink="/clients/{{client.key}}">
+                Go to profile
+                <span class="icon-arrow-right-circle"></span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4">
+              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,20,50]"></mfBootstrapPaginator>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <ng-template #template>
+    <app-modal
+      (close)="closeModal()"></app-modal>
+  </ng-template>
+
+</div>
+
+<ng-template #loading>
+  <tr>
+    <td colspan="4">
+      <client-spinner></client-spinner>
+    </td>
+  </tr>
+</ng-template>
+
+
+
+
+

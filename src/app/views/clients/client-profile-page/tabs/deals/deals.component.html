@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-primary" data-toggle="myModal" (click)="openModal(template)">
+      <i class="fa fa-plus-square"></i>
+      Add Deal
+    </button>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-12">
+    <table class="table table-bordered table-striped" >
+      <thead>
+        <tr>
+          <th>Deal</th>
+          <th>Value</th>
+          <th>Start Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="deals$ | async as deals">
+        <tr *ngFor="let deal of deals">
+          <td>{{deal.name}}</td>
+          <td>{{deal.value}}</td>
+          <td>{{deal.startDate}}</td>
+          <td>{{deal.milestone}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="col-xs-12 col-12 col-md-6">
+        <pagination
+          [directionLinks]="false"
+          [totalItems]="totalItems"
+          [(ngModel)]="currentPage"
+          (numPages)="smallnumPages = $event">
+        </pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">New Deal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form (ngSubmit)="addDeal(f)" #f="ngForm">
+    <div class="modal-body container">
+
+      <!-- Deal name -->
+      <div class="form-group">
+        <label for="dealName">Name</label>
+        <input
+          class="form-control" name="dealName" placeholder="Deal Name"
+          type="text" ngModel #dealName="ngModel" required>
+        <div class="text-danger" *ngIf="dealName.invalid && dealName.touched">
+          <div *ngIf="dealName.errors.required">Enter a name.</div>
+        </div>
+      </div>
+
+      <!-- Value -->
+      <div class="form-group">
+        <label for="value">Value</label>
+        <input
+          class="form-control" name="value" placeholder="Value"
+          type="number" ngModel #value="ngModel" required>
+        <div class="text-danger" *ngIf="value.invalid && value.touched">
+          <div *ngIf="value.errors.required">Enter a value</div>
+        </div>
+      </div>
+
+      <!-- Milestone -->
+      <div class="form-group">
+        <label for="milestone">Milestone</label>
+        <select
+          class="form-control" name="milestone" required
+          type="string" ngModel #milestone="ngModel">
+          <option value="">Select...</option>
+          <option [value]="m.toLowerCase()" *ngFor="let m of milestones">{{m}}</option>
+        </select>
+
+        <div class="text-danger" *ngIf="milestone.invalid && milestone.touched">
+          <div *ngIf="milestone.errors.required">Enter a milestone.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modalRef.hide()">Close</button>
+      <button type="button" class="btn btn-warning" (click)="f.reset()">Clear</button>
+      <button class="btn btn-primary" [disabled]="f.invalid">Add Deal</button>
+    </div>
+  </form>
+</ng-template>
+

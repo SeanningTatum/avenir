@@ -1,0 +1,53 @@
+<div class="card" *ngIf="client">
+  <div class="card-block text-center">
+    <h4 *ngIf="!editMode" class="card-title">{{client.name}}</h4>
+    <input type="text" class="form-control" [(ngModel)]="client.name" *ngIf="editMode">
+    <p class="card-text">- additional information here-</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <h5 class="mb-4">Contact Information</h5>
+      <div class="row">
+        <div class="col-12 mb-3">
+          <div *ngIf="!editMode">
+            <span>Phone number</span>
+            <p>{{client.phone}}</p>
+          </div>
+          <div *ngIf="editMode">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="client.phone"
+              *ngIf="editMode"
+              maxlength="11">
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div *ngIf="!editMode">
+            <span>Email</span>
+            <p>{{client.email}}</p>
+          </div>
+          <div *ngIf="editMode">
+            <input type="text" class="form-control" [(ngModel)]="client.email" *ngIf="editMode">
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="card-block">
+    <div class="row">
+      <div class="col-md-6" (click)="editMode = !editMode">
+        <button *ngIf="!editMode" class="btn btn-warning">Edit</button>
+        <button
+          (click)="update()"
+          *ngIf="editMode"
+          class="btn btn-success">Save</button>
+      </div>
+      <div class="col-md-6">
+
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,58 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Add Client</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form (ngSubmit)="addClient(f)" #f="ngForm">
+  <div class="modal-body">
+
+      <!-- full name -->
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+          <input
+            class="form-control" name="fullname" placeholder="Contact Name"
+            type="text" ngModel #fullname="ngModel" required>
+        </div>
+        <div class="text-danger" *ngIf="fullname.invalid && fullname.touched">
+          <div *ngIf="fullname.errors.required">Enter a name.</div>
+        </div>
+      </div>
+
+      <!-- email -->
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+          <input
+            class="form-control" name="email" placeholder="Email"
+            type="text" ngModel #email="ngModel" required>
+        </div>
+        <div class="text-danger" *ngIf="email.invalid && email.touched">
+          <div *ngIf="email.errors.required">Enter an email.</div>
+        </div>
+      </div>
+
+      <!-- phone number -->
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+          <input
+            class="form-control" name="phonenumber" placeholder="Phone Number"
+            type="string" ngModel #phonenumber="ngModel" required minlength="11"
+            maxlength="11">
+        </div>
+        <div class="text-danger" *ngIf="phonenumber.invalid && phonenumber.touched">
+          <div *ngIf="phonenumber.errors.required">Enter a number.</div>
+          <div *ngIf="phonenumber.errors.minlength">Number must have 11 digits</div>
+        </div>
+      </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="hide()">Close</button>
+    <button type="button" class="btn btn-warning" (click)="f.reset()">Clear</button>
+    <button class="btn btn-primary" [disabled]="f.invalid">Add Client</button>
+  </div>
+</form>

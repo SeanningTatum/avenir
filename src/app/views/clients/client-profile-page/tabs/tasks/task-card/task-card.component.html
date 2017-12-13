@@ -1,0 +1,10 @@
+<div class="card"
+  [class.card-accent-warning]="pending"
+  [class.card-accent-success]="!pending">
+  <div class="card-header">
+    <ng-content select=".header"></ng-content>
+  </div>
+  <div class="card-body m-0 p-0">
+    <ng-content select=".task"></ng-content>
+  </div>
+</div>
