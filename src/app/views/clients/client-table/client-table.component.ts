@@ -24,7 +24,7 @@ export class ClientTableComponent implements OnInit {
   constructor(private modalService: BsModalService, private clientService: ClientService) { }
 
   ngOnInit() {
-    this.data = this.clientService.getAll();
+    this.data = this.clientService.getAllWithKey();
     this.data.subscribe( () => this.showSpinner = false);
   }
 

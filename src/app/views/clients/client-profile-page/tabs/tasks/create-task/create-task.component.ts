@@ -24,7 +24,7 @@ export class CreateTaskComponent implements OnInit {
 
   createTask(taskName) {
     const key = this.route.parent.snapshot.paramMap.get('key');
-    this.taskService.add(new Task(taskName.value, this.bsValue.toDateString(), false, key, null));
+    this.taskService.add(new Task(taskName.value, this.bsValue.toJSON(), false, key, null));
     taskName.value = '';
   }
 

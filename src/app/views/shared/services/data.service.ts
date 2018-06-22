@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class DataService {
@@ -10,7 +11,7 @@ export class DataService {
     return this.db.object<any>(this.dbName + '/' + key);
   }
 
-  getBasedOnUser(key: string) {
+  getBasedOnUser(key: string): Observable<any> {
     return this.db.list(this.dbName, ref => {
       return ref.orderByChild('ownedBy').equalTo(key);
     })
@@ -19,10 +20,14 @@ export class DataService {
     });
   }
 
-  getAll() {
+  getAllWithKey() {
     return this.db.list(this.dbName).snapshotChanges().map(changes => {
       return changes.map<any>(c => ({ key: c.payload.key, ...c.payload.val() }));
     });
+  }
+
+  getAllNoKey() {
+    return this.db.list(this.dbName).valueChanges();
   }
 
   add(resource) {

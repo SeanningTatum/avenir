@@ -1,4 +1,3 @@
-import { AngularFireDatabase } from 'angularfire2/database';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,13 +8,13 @@ import { ClientService } from 'app/views/clients/services/client.service';
 @Component({
   templateUrl: 'dashboard.component.html'
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
   clients$: Observable<Client[]>;
 
   constructor(private clientService: ClientService) { }
 
   ngOnInit() {
-    this.clients$ = this.clientService.getAll();
+    this.clients$ = this.clientService.getAllWithKey();
   }
 
 }

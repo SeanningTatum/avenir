@@ -17,4 +17,13 @@ export const navigation = [
       text: ''
     }
   },
+  {
+    name: 'Units',
+    url: '/units',
+    icon: 'icon-home',
+    badge: {
+      variant: 'info',
+      text: ''
+    }
+  }
 ];

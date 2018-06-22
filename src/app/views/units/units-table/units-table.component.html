@@ -1,0 +1,63 @@
+<h1 class="display4 mr-auto">Units</h1>
+<hr class="my-3">
+<div class="card">
+  <div class="card-body">
+    <div class="row mb-3">
+      <div class="col-md-6 col-sm-6 col-12 mb-3">
+        <div class="input-group">
+          <select name="floorNumber" class="form-control" [(ngModel)]="floorNumber" (change)="changeQuery()">
+            <option value="">All</option>
+            <option [value]="floor" *ngFor="let floor of floors">{{floor}}</option>
+          </select>
+          <select name="letter" class="form-control" [(ngModel)]="floorLetter" (change)="changeQuery()">
+            <option value="">All</option>
+            <option [value]="letter" *ngFor="let letter of letters">{{letter}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <table class="table table-striped table-bordered" [mfData]="data | async | dataFilter: filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+      <thead>
+        <tr>
+          <th style="width: 40%">
+            <mfDefaultSorter by="key">Unit Number</mfDefaultSorter>
+          </th>
+          <th style="width: 30%">
+            <mfDefaultSorter by="occupied">Occupied</mfDefaultSorter>
+          </th>
+          <th style="width: 30%">
+            <mfDefaultSorter>View unit</mfDefaultSorter>
+          </th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!showSpinner; else loading">
+        <tr *ngFor="let unit of mf.data; let x = index">
+          <td class="align-middle">{{unit.key}}</td>
+          <td class="align-middle">{{unit.occupied | json | uppercase}}</td>
+          <td>
+            <button class="btn btn-warning" routerLink="/units/{{unit.key}}">
+              View Unit
+              <span class="icon-arrow-right-circle"></span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,20,50]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<ng-template #loading>
+  <tr>
+    <td colspan="4">
+      <loading-spinner></loading-spinner>
+    </td>
+  </tr>
+</ng-template>

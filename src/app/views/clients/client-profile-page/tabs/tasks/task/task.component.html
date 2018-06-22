@@ -7,12 +7,13 @@
       (click)="finish(task)"
       *ngIf="!task.finished"
       class="btn btn-secondary float-right">Finish</button>
-    <h5>{{task.title}}</h5>
+    <h5 *ngIf="task.finished"><s>{{task.title}}</s></h5>
+    <h5 *ngIf="!task.finished">{{task.title}}</h5>
     <p class="m-0 badge badge-success" *ngIf="task.finished">
       <span>Finished on: {{task.finishDate | date}}</span>
     </p>
     <p class="m-0 badge badge-danger">
-      <span>Due date: {{task.dueDate}}</span>
+      <span>Due date: {{task.dueDate | date}}</span>
     </p>
   </div>
   <hr class="mx-3 my-0" *ngIf="i !== 0">

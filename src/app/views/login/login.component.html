@@ -1,4 +1,4 @@
-<loading-spinner *ngIf="showSpinner"></loading-spinner>
+<full-width-spinner *ngIf="showSpinner"></full-width-spinner>
 <div class="app flex-row align-items-center">
   <div class="container">
     <div class="row justify-content-center">
@@ -25,7 +25,7 @@
                 <div class="col-6">
                   <button
                     (click)="login(username.value, password.value)"
-                    type="button"
+                    type="submit"
                     class="btn btn-primary px-4">Login</button>
                 </div>
                 <div class="col-6 text-right">

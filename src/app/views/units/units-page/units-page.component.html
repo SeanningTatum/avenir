@@ -1,0 +1,107 @@
+<div class="card" *ngIf="unit$ | async as unit">
+  <div class="card-header">
+    <div class="row">
+      <h3 class="mr-auto col-8">{{unit.key}}</h3>
+      <button class="btn btn-warning col-4" (click)="editMode = !editMode">Edit</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="container">
+      <div class="card-group mb-4">
+
+        <div class="card text-white"
+          [class.bg-success]="unit.aircon"
+          [class.bg-danger]="!unit.aircon"
+          (click)="toggleAircon(unit)">
+          <div class="card-body">
+            <div class="h1 text-muted text-right mb-4">
+              <i class="icon-people"></i>
+            </div>
+            <div class="h4 mb-0" *ngIf="!editMode">{{unit.aircon | json | uppercase}}</div>
+            <small class="text-muted text-uppercase font-weight-bold">Aircon</small>
+          </div>
+        </div>
+
+        <div class="card text-white"
+          [class.bg-success]="unit.blinds"
+          [class.bg-danger]="!unit.blinds"
+          (click)="toggleBlinds(unit)">
+          <div class="card-body">
+            <div class="h1 text-muted text-right mb-4">
+              <i class="icon-user-follow"></i>
+            </div>
+            <div class="h4 mb-0">{{unit.blinds | json |uppercase}}</div>
+            <small class="text-muted text-uppercase font-weight-bold">Blinds</small>
+          </div>
+        </div>
+
+        <div class="card text-white" [class.bg-success]="unit.occupied" [class.bg-danger]="!unit.occupied">
+          <div class="card-body">
+            <div class="h1 text-muted text-right mb-4">
+              <i class="icon-user-follow"></i>
+            </div>
+            <div class="h4 mb-0">{{unit.occupied}}</div>
+            <small class="text-muted text-uppercase font-weight-bold">Occupied</small>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="h1 text-muted text-right mb-4">
+              <i class="icon-user-follow"></i>
+            </div>
+            <div class="h4 mb-0">{{clientName || '-'}}</div>
+            <small class="text-muted text-uppercase font-weight-bold">Owned By</small>
+          </div>
+        </div>
+      </div> <!-- card-group -->
+
+      <div class="card-group mb-4">
+
+        <div class="card bg-info text-white">
+            <div class="card-body">
+              <div class="h1 text-muted text-right mb-4">
+                <i class="icon-user-follow"></i>
+              </div>
+              <div class="h4 mb-0">{{(unit.totalCost | currency:'PHP': '4-2-2') || '-'}}</div>
+              <small class="text-muted text-uppercase font-weight-bold">Total Cost</small>
+            </div>
+          </div>
+
+          <div class="card bg-info text-white">
+            <div class="card-body">
+              <div class="h1 text-muted text-right mb-4">
+                <i class="icon-user-follow"></i>
+              </div>
+              <div class="h4 mb-0">{{unit.monthlyCost | currency: 'PHP': '4-2-2' || '-'}}</div>
+              <small class="text-muted text-uppercase font-weight-bold">Monthly Cost</small>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="h1 text-muted text-right mb-4">
+                <i class="icon-user-follow"></i>
+              </div>
+              <div class="h4 mb-0">{{(unit.startDate | date) || '-'}}</div>
+              <small class="text-muted text-uppercase font-weight-bold">Start Date</small>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="h1 text-muted text-right mb-4">
+                <i class="icon-user-follow"></i>
+              </div>
+              <div class="h4 mb-0">{{(unit.endDate | date) || '-'}}</div>
+              <small class="text-muted text-uppercase font-weight-bold">End Date</small>
+            </div>
+          </div>
+      </div> <!-- card-group -->
+
+    </div>
+  </div>
+</div>
+
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+

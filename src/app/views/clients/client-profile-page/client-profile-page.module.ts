@@ -16,13 +16,15 @@ import { TaskCardComponent } from './tabs/tasks/task-card/task-card.component';
 
 // 3rd party imports
 import { BsDatepickerModule } from 'ngx-bootstrap';
+import { SpinnerModule } from 'app/shared/spinner.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ClientProfilePageRoutingModule,
     FormsModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    SpinnerModule
   ],
   declarations: [
     ClientProfilePageComponent,

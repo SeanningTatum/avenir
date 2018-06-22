@@ -31,16 +31,19 @@ export const routes: Routes = [
     data: {
       title: 'Home'
     },
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
-        loadChildren: './views/dashboard/dashboard.module#DashboardModule',
-        canActivate: [AuthGuard]
+        loadChildren: './views/dashboard/dashboard.module#DashboardModule'
       },
       {
         path: 'clients',
-        loadChildren: './views/clients/clients.module#ClientsModule',
-        canActivate: [AuthGuard]
+        loadChildren: './views/clients/clients.module#ClientsModule'
+      },
+      {
+        path: 'units',
+        loadChildren: './views/units/units.module#UnitsModule'
       }
     ]
   }

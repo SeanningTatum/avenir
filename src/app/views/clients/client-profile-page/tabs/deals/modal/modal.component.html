@@ -1,0 +1,97 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">New Deal</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form (ngSubmit)="addDeal(f)" #f="ngForm">
+  <div class="modal-body container">
+
+    <!-- Deal name -->
+    <div class="form-group">
+      <label for="dealName">Name</label>
+      <input
+        class="form-control" name="dealName" placeholder="Deal Name"
+        type="text" ngModel #dealName="ngModel" required>
+      <div class="text-danger" *ngIf="dealName.invalid && dealName.touched">
+        <div *ngIf="dealName.errors.required">Enter a name.</div>
+      </div>
+    </div>
+
+    <!-- Value -->
+    <div class="form-group">
+      <label for="value">Value</label>
+      <input
+        class="form-control" name="value" placeholder="Value"
+        type="number" ngModel #value="ngModel" required>
+      <div class="text-danger" *ngIf="value.invalid && value.touched">
+        <div *ngIf="value.errors.required">Enter a value</div>
+      </div>
+    </div>
+
+    <!-- Milestone -->
+    <div class="form-group">
+      <label for="milestone">Milestone</label>
+      <select
+        class="form-control" name="milestone" required
+        type="string" ngModel #milestone="ngModel">
+        <option value="">Select...</option>
+        <option [value]="m.toLowerCase()" *ngFor="let m of milestones">{{m}}</option>
+      </select>
+
+      <div class="text-danger" *ngIf="milestone.invalid && milestone.touched">
+        <div *ngIf="milestone.errors.required">Enter a milestone.</div>
+      </div>
+    </div>
+
+    <!-- Date -->
+    <div class="form-group">
+      <label for="date">Date Length</label>
+      <div class="row mb-3">
+        <div class="col-12 col-md-8">
+          <input class="form-control" name="date"
+            #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="bsRangeValue"
+            [disabled]="milestone.value !== 'won'">
+        </div>
+        <div class="col-12 col-md-3">
+          <button type="button" class="btn btn-success"
+          (click)="drp.toggle()" [disabled]="milestone.value !== 'won'">Date Length</button>
+        </div>
+      </div>
+      <small>mm-dd-yyyy</small>
+    </div>
+
+    <!-- Unit -->
+    <div class="form-group">
+      <label for="value">Unit</label>
+      <div class="input-group">
+        <select name="floorNumber" class="form-control" [(ngModel)]="floorNumber" (change)="changeQuery()"
+                [disabled]="milestone.value !== 'won'">
+          <option value="">All</option>
+          <option [value]="floor" *ngFor="let floor of floors">{{floor}}</option>
+        </select>
+        <select name="letter" class="form-control" [(ngModel)]="floorLetter" (change)="changeQuery()"
+                [disabled]="milestone.value !== 'won'">
+          <option value="">All</option>
+          <option [value]="letter" *ngFor="let letter of letters">{{letter}}</option>
+        </select>
+      </div>
+      <small *ngIf="unit$ | async as unit">
+        <p *ngIf="unit.occupied" class="text-danger">This unit is unavaiable</p>
+        <p *ngIf="!unit.occupied" class="text-success">This unit is avaiable</p>
+      </small>
+
+    </div>
+
+  </div><!-- ./container -->
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="hide()">Close</button>
+    <button type="button" class="btn btn-warning" (click)="f.reset()">Clear</button>
+    <button
+      class="btn btn-primary"
+      [disabled]="f.invalid || (milestone.value === 'won' && occupied)">
+        Add Deal
+    </button>
+  </div>
+</form>

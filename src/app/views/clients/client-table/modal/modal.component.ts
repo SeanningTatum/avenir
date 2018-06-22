@@ -20,11 +20,10 @@ export class ModalComponent implements OnInit {
   }
 
   addClient(form: NgForm) {
-    if (!form.invalid) {
-      this.clientService.add(new Client(form.value.fullname, form.value.email, form.value.phonenumber));
-      form.reset();
-    }
+    if (form.invalid) return;
 
+    this.clientService.add(new Client(form.value.fullname, form.value.email, form.value.phonenumber));
+    form.reset();
   }
 
   hide() {

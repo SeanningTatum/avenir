@@ -5,8 +5,6 @@ export class Deal {
     public milestone: string,
     public ownedBy: string,
     public startDate?: string,
-    public endDate?: string,
-  ) {
-
-  }
+    public endDate?: string
+  ) { }
 }

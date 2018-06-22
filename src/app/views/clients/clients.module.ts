@@ -7,23 +7,20 @@ import { ClientsComponent } from './clients.component';
 import { ClientsRoutingModule } from 'app/views/clients/clients-routing.module';
 import { DataTableModule } from 'angular2-datatable';
 import { ModalComponent } from './client-table/modal/modal.component';
-import { ClientSpinnerComponent } from 'app/shared/client-spinner/client-spinner.component';
-
-import { DataFilterPipe } from 'app/views/clients/client-table/data-filter.pipe';
+import { SpinnerModule } from 'app/shared/spinner.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ClientsRoutingModule,
     FormsModule,
-    DataTableModule
+    DataTableModule,
+    SpinnerModule
   ],
   declarations: [
     ClientsComponent,
     ClientTableComponent,
-    DataFilterPipe,
-    ModalComponent,
-    ClientSpinnerComponent
+    ModalComponent
   ],
   providers: []
 })

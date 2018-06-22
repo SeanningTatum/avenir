@@ -21,6 +21,10 @@ const routes: Routes = [
       {
         path: 'deals',
         loadChildren: './tabs/deals/deals.module#DealsModule'
+      },
+      {
+        path: 'units-owned',
+        loadChildren: './tabs/units-owned/units-owned.module#UnitsOwnedModule'
       }
     ]
   }

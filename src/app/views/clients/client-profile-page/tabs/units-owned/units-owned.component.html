@@ -1,0 +1,18 @@
+<div *ngIf="loading; else loading">
+  <div class="row" *ngIf="unitsOwned$ | async as units">
+    <div class="col-md-4" *ngFor="let unit of units">
+      <div class="card text-center">
+        <div class="card-body">
+          <div class="card-title">{{unit.key}}</div>
+          <button
+            class="btn btn-primary"
+            routerLink="/units/{{unit.key}}">View Unit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <loading-spinner></loading-spinner>
+</ng-template>
